@@ -1,0 +1,116 @@
+\chapter{Neutrino}
+
+Neutrino er et turbaseret spil for to. Man skal bruge en række-reduceret ølmatrix
+(bedre kendt som en tom ølkasse), fem Tuborg, fem Carlsberg, en cocio ("neutrinoen") samt fem vilkårlige øl der tømmes før spillet kan begynde.
+
+De fem tomme flasker bruges til at omforme ølmatricen til en kvadratisk $5 \times 5$-matrix, som fungerer som spilleplade. På rækkerne 1 og 5 placeres henholdsvis Tuborg- og Carlsberg-øllene, og neutrinoen sættes i $(3, 3)$-indgangen, altså centrum af spillepladen, som derfor nu ser ud som illustrationen til højre. Lad os antage spilleren med Carlsberg-brikkerne starter.
+\[
+\begin{array}{|c|c|c|c|c|}
+		\hline
+		\text{T} & \text{T} & \text{T} & \text{T} & \text{T} \\ 
+		\hline
+		&    &     &    &     \\ 
+		\hline
+		&   & \text{N} &    &     \\ 
+		\hline
+		&   &    &     &     \\ 
+		\hline
+		\text{C} & \text{C} & \text{C} & \text{C} & \text{C} \\ 
+		\hline
+\end{array}
+\]
+Et træk i Neutrino foregår således: Først flyttes neutrinoen i en af de otte retninger (som dronningen i skak) så langt som den kan til den støder på en forhindring, og derefter flytter spilleren en af sine egne brikker på samme måde. En forhindring betyder enten kanten af spillepladen, eller en anden brik. Efter den første tur kan spillepladen altså fx se ud som en af de tre første illustrationer herunder. Derimod kan spillepladen efter første træk ikke se ud som illustrationen længst til højre, idet neutrinoen ikke er blevet rykket helt til venstre.
+
+\begin{minipage}{0.23\textwidth}
+	\[
+	\begin{array}{|c|c|c|c|c|}
+		\hline
+		\text{T} & \text{T} & \text{T} & \text{T} & \text{T} \\ 
+		\hline
+		\text{C} &    &     &    &     \\ 
+		\hline
+		&   &  &    & \text{N}     \\ 
+		\hline
+		&   &    &     &     \\ 
+		\hline
+		& \text{C} & \text{C} & \text{C} & \text{C} \\ 
+		\hline
+	\end{array}
+	\]
+\end{minipage}
+\begin{minipage}{0.23\textwidth}
+	\[
+	\begin{array}{|c|c|c|c|c|}
+		\hline
+		\text{T} & \text{T} & \text{T} & \text{T} & \text{T} \\ 
+		\hline
+		&   \text{N}   &     &  &     \\ 
+		\hline
+		&   &  &    &      \\ 
+		\hline
+		&   &    &     &   \text{C}  \\ 
+		\hline
+		\text{C} & \text{C} & \text{C} &  & \text{C} \\ 
+		\hline
+	\end{array}
+	\]
+\end{minipage}
+\begin{minipage}{0.23\textwidth}
+\[
+\begin{array}{|c|c|c|c|c|}
+	\hline
+	\text{T} & \text{T} & \text{T} & \text{T} & \text{T} \\ 
+	\hline
+	&    &     & \text{N} &     \\ 
+	\hline
+	&   &  &  \text{C}	  &      \\ 
+	\hline
+	&   &    &     &     \\ 
+	\hline
+	\text{C} & \text{C} & \text{C} &  & \text{C} \\ 
+	\hline
+\end{array}
+\]
+\end{minipage}
+\begin{minipage}{0.23\textwidth}
+\[
+\begin{array}{|c|c|c|c|c|}
+	\hline
+	\text{T} & \text{T} & \text{T} & \text{T} & \text{T} \\ 
+	\hline
+	&    &     &  &     \\ 
+	\hline
+	&  \text{N} &  &  	  &      \\ 
+	\hline
+	&  \text{C} &    &     &     \\ 
+	\hline
+	\text{C} &  & \text{C} & \text{C} & \text{C} \\ 
+	\hline
+\end{array}
+\]
+\end{minipage}
+
+\bigskip
+Herefter foretager Tuborg-spilleren et træk efter samme princip; altså først flyttes neutrinoen, og derefter en af ens egne brikker, og så fremdeles. Det er ikke tilladt at flytte 0 felter i en given retning, så man skal med andre ord flytte brikkerne i en retning hvor de faktisk kan flyttes. 
+
+\begin{wrapfigure}{r}{0.25\textwidth}
+	\[
+	\begin{array}{|c|c|c|c|c|}
+		\hline
+		& \text{T} &  &  & \text{T} \\ 
+		\hline
+		&    &     &  &     \\ 
+		\hline
+		\text{N} & \text{C}  &  &  \text{T}	  &      \\ 
+		\hline
+		\text{C} & \text{T}   &    &  \text{C}   &  \text{T}   \\ 
+		\hline
+		&  & \text{C} &  & \text{C} \\ 
+		\hline
+	\end{array}
+	\]
+\end{wrapfigure}
+Der er to måder at vinde på: Ved at få neutrinoen ned på modstanderens baglinje, eller ved at forhindre modstanderen i at kunne lave et gyldigt træk (dvs. ved at lukke neutrinoen inde). Det er ligegyldigt hvem der flytter neutrinoen ned på baglinjen. Hvis det f.eks. er Tuborg-spillerens tur til at rykke, og spillepladen ser ud som illustreret til højre, er den eneste mulighed at neutrinoen rykkes ned på egen baglinje, hvorved Tuborg-spilleren taber.
+
+
+Efter ens første træk må man ikke rykke således, at ens fem brikker alle (igen) befinder sig på ens egen baglinje. Det er normalt at taberen af det foregående spil bestemmer hvem der starter i det næste spil. Hvis der findes en vindende strategi for starteren eller nummer to kan taberen jo bare sørge for at blive spilleren med fordelen. . .

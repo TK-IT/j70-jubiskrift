@@ -18,3 +18,6 @@
 *.pdfsync
 *.rubbercache
 *.pdf
+*.idx
+*.ilg
+*.ind

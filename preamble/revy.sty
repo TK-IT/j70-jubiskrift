@@ -1,0 +1,408 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{revy}[2013/25/11]
+
+\RequirePackage{keyval}
+\RequirePackage{ifthen, calc}
+\RequirePackage{latexsym}
+%\RequirePackage{bbding}
+\RequirePackage{marvosym}
+\RequirePackage{comment}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{wasysym}
+\RequirePackage{tikz}
+\RequirePackage{xspace}
+
+
+
+
+\newboolean{revy@centerPerson}
+\newlength{\revy@personLabelWidth}
+\newlength{\revy@personLabelOffset}
+\newlength{\revy@versFigurLabelWidth}{}
+\newlength{\revy@verseLabelWidth}
+\newlength{\revy@verseLabelOffset}
+\newlength{\revy@replikafstand}
+\newlength{\revy@strofeafstand}
+\newcommand{\revy@regiFormat}{}
+\newcommand{\revy@personFormat}{}
+\newcommand{\revy@strofeEtiketFormat}{}
+\newcommand{\revy@versFormat}{}
+\newcommand{\revy@akkordFormat}{}
+\newcommand{\revy@kommentarFormat}{}
+\newcommand{\revy@lydFormat}{}
+\newcommand{\revy@fuldsceneFormat}{}
+\newcommand{\revy@forsceneFormat}{}
+\newcommand{\revy@tidFormat}{}
+\newcommand{\revy@bandkommentarFormat}{}
+\newcommand{\regi}[1]{(\textit{#1})}
+\newcommand{\lyd}[1]{(\textnormal{\ForwardToEnd:} \textit{#1})}
+\newcommand{\fuldscene}[1]{$(\leftarrow \rightarrow)$}
+\newcommand{\forscene}[1]{$(\rightarrow \leftarrow)$}
+\newcommand{\tid}[1]{}
+
+\excludecomment{Bandkommentar}
+
+\define@key{revy}{center}[true]{%
+  \setboolean{revy@centerPerson}{#1}%
+}
+\define@key{revy}{personbredde}{%
+  \setlength{\revy@personLabelWidth}{#1}%
+}
+\define@key{revy}{personafstand}{%
+  \setlength{\revy@personLabelOffset}{#1}%
+}
+\define@key{revy}{etiketbredde}{%
+  \setlength{\revy@verseLabelWidth}{#1}%
+}
+\define@key{revy}{etiketafstand}{%
+  \setlength{\revy@verseLabelOffset}{#1}%
+}
+\define@key{revy}{replikafstand}{%
+  \setlength{\revy@replikafstand}{#1}%
+}
+\define@key{revy}{strofeafstand}{%
+  \setlength{\revy@strofeafstand}{#1}%
+}
+\define@key{revy}{regi}{%
+  \renewcommand{\revy@regiFormat}{#1}%
+}
+\define@key{revy}{person}{%
+  \renewcommand{\revy@personFormat}{#1}%
+}
+\define@key{revy}{etiket}{%
+  \renewcommand{\revy@strofeEtiketFormat}{#1}%
+}
+\define@key{revy}{vers}{%
+  \renewcommand{\revy@versFormat}{#1}%
+}
+\define@key{revy}{akkord}{%
+  \renewcommand{\revy@akkordFormat}{#1}%
+}
+\define@key{revy}{kommentar}{%
+  \renewcommand{\revy@kommentarFormat}{#1}%
+}
+\define@key{revy}{lyd}{%
+  \renewcommand{\revy@lydFormat}{#1}%
+}
+\define@key{revy}{fuldscene}{%
+  \renewcommand{\revy@fuldsceneFormat}{#1}%
+}
+\define@key{revy}{forscene}{%
+  \renewcommand{\revy@forsceneFormat}{#1}%
+}
+\define@key{revy}{tid}{%
+  \renewcommand{\revy@tidFormat}{#1}%
+}
+\define@key{revy}{bandkommentar}{%
+  \renewcommand{\revy@bandkommentarFormat}{#1}%
+}
+
+\newcommand{\revy@reset}{%
+  \setlength{\revy@personLabelWidth}{23mm}%
+  \setlength{\revy@personLabelOffset}{2mm}%
+  \setlength{\revy@versFigurLabelWidth}{15mm}%
+  \setlength{\revy@verseLabelWidth}{8mm}%
+  \setlength{\revy@verseLabelOffset}{2mm}%
+  \setlength{\revy@replikafstand}{2mm}%
+  \setlength{\revy@strofeafstand}{2mm}%
+  \renewcommand{\revy@regiFormat}{\itshape}%
+  \renewcommand{\revy@personFormat}{\bfseries}%
+  \renewcommand{\revy@strofeEtiketFormat}{\itshape}%
+  \renewcommand{\revy@versFormat}{}%
+  \renewcommand{\revy@akkordFormat}{\footnotesize\itshape}%
+  \renewcommand{\revy@kommentarFormat}{\itshape}%
+  \renewcommand{\revy@lydFormat}{}%
+  \renewcommand{\revy@fuldsceneFormat}{}%
+  \renewcommand{\revy@forsceneFormat}{}%
+  \renewcommand{\revy@tidFormat}{}%
+}
+
+%% --------------------
+
+\def\ProcessOptionsWithKV#1{%
+  \let\@tempc\relax
+  \let\Hy@tempa\@empty
+  \@for\CurrentOption:=\@classoptionslist\do{%
+    \@ifundefined{KV@#1@\CurrentOption}%
+    {}%
+    {%
+      \edef\Hy@tempa{\Hy@tempa,\CurrentOption,}%
+      \@expandtwoargs\@removeelement\CurrentOption
+        \@unusedoptionlist\@unusedoptionlist
+    }%
+  }%
+  \edef\Hy@tempa{%
+    \noexpand\setkeys{#1}{%
+      \Hy@tempa\@ptionlist{\@currname.\@currext}%
+    }%
+  }%
+  \Hy@tempa
+}
+
+%% --------------------
+
+\revy@reset
+\ProcessOptionsWithKV{revy}
+
+\DeclareOption*{}
+\ProcessOptions
+
+\newboolean{revy@inSketch}
+\newboolean{revy@inSang}
+
+\newenvironment{Regi}{%
+  \noindent%
+  \revy@regiFormat\ignorespaces%
+}{%
+  \par%
+  \vspace{\revy@replikafstand}%
+}
+
+\newenvironment{Rekvisitter}{%
+  \subsection*{Rekvisitter}
+  \begin{list}{$\Box$}{%
+    \setlength{\itemsep}{0mm}%
+    \setlength{\parsep}{0mm}%
+  }%
+}{%
+  \end{list}%
+}
+
+\newenvironment{Figurgalleri}{%
+  \subsection*{Figurgalleri}
+  \begin{list}{}{%
+    \setlength{\itemsep}{0mm}%
+    \setlength{\parsep}{0mm}%
+  }%
+}{%
+  \end{list}%
+}
+
+\newenvironment{Persongalleri}{%
+  \subsection*{Persongalleri}
+  \begin{list}{}{%
+    \setlength{\itemsep}{0mm}%
+    \setlength{\parsep}{0mm}%
+  }%
+}{%
+  \end{list}%
+}
+
+\newenvironment{Lydeffekter}{%
+  \subsection*{Lydeffekter}
+  \begin{list}{\ForwardToEnd}{%
+    \setlength{\itemsep}{0mm}%
+    \setlength{\parsep}{0mm}%
+  }%
+}{%
+  \end{list}%
+}
+
+\newenvironment{Replik}[1][]{%
+  \noindent%
+  \begin{minipage}[t]{\linewidth}%
+    \ifthenelse{\boolean{revy@centerPerson}}{%
+      \hfil\textbf{#1}\hfil\\%
+    }{%
+      \setlength{\hangindent}{\revy@personLabelWidth+\revy@personLabelOffset}%
+      \settowidth{\dimen87}{\revy@personFormat #1}%
+      \ifthenelse{\lengthtest{\dimen87<\revy@personLabelWidth}}{%
+        \makebox[\revy@personLabelWidth][l]{\revy@personFormat #1}%
+      }{%
+        {\revy@personFormat #1}\ %
+      }%
+      \hspace*{\revy@personLabelOffset}%
+    }%
+    \ignorespaces%
+}{%
+  \end{minipage}%
+  \par%
+  \vspace{\revy@replikafstand}%
+}
+
+\newcounter{revy@scene}
+
+\newenvironment{Scene}[1]{%
+  \refstepcounter{revy@scene}%
+  \subsection*{Scene \arabic{revy@scene}: #1}%
+  \addcontentsline{toc}{subsection}{Scene \arabic{revy@scene}: #1}%
+}{%
+  \par
+}
+
+\newenvironment{Sketch}[1]{%
+  \bgroup%
+  \setcounter{revy@scene}{0}%
+  \setlength{\parskip}{0mm}%
+  %% \clearpage
+  \section*{#1}%
+  \addcontentsline{toc}{section}{#1}
+  \setboolean{revy@inSketch}{true}%
+}{%
+  \setboolean{revy@inSketch}{false}%
+  \egroup%
+  \par
+}
+
+\newcounter{revy@verse}
+\newboolean{revy@firstVers}
+
+\newlength{\revy@chordWidth}
+\newlength{\revy@lyricsWidth}
+
+\newcommand{\revy@akkord}[1]{%
+  \settowidth{\revy@chordWidth}{\revy@akkordFormat #1}%
+  \makebox[0mm][l]{\raisebox{\baselineskip}[2\baselineskip]{\revy@akkordFormat #1}}%
+}
+
+\newif\if@hyphen
+
+\def\revy@striphyphen#1{%
+  \def\@tempa{-}%
+  \@hyphenfalse%
+  \count87=0%
+  \@tfor\@nextchar:=#1\do{%
+    \advance\count87 by 1%
+    \ifx\@nextchar\@tempa%
+      \@hyphentrue%
+    \else%
+      \@hyphenfalse%
+    \fi%
+  }%
+  \if@hyphen%
+    \count88=1%
+    \@tfor\@nextchar:=#1\do{%
+      \advance\count88 by 1%
+      \ifnum\count88<\count87%
+        \@nextchar%
+      \fi%
+    }%
+  \else%
+    #1%
+  \fi%
+}
+
+\newcommand{\lyrics}[2][]{%
+  \settowidth{\revy@lyricsWidth}{#2}%
+  \revy@akkord{#1}%
+  \ifthenelse{\lengthtest{\revy@chordWidth > \revy@lyricsWidth}}{%
+    %% \setlength{\fboxsep}{0mm}%
+    %% \framebox[\revy@chordWidth+0.5ex][l]{%
+    \makebox[\revy@chordWidth+0.5ex][l]{%
+      \revy@striphyphen{#2}%
+      \if@hyphen\hfill-\hfill\fi%
+    }%
+    \ignorespaces%
+  }{%
+    \mbox{#2}%
+  }%
+}
+
+\newenvironment{Sang}[2][]{%
+  \newcommand{\Vers}[2][]{%
+    \ifthenelse{\boolean{revy@firstVers}}{%
+      \setboolean{revy@firstVers}{false}%
+    }{%
+      %% [newline]
+      \mbox{}\\%
+    }%
+    \ignorespaces%
+    \ifthenelse{\not\equal{##1}{}}{%
+      \ifthenelse{\not\equal{##1}{---}}{%
+        \settowidth{\dimen87}{\revy@personFormat ##1}%
+        \ifthenelse{\lengthtest{\dimen87<\revy@versFigurLabelWidth}}{%
+          \makebox[\revy@versFigurLabelWidth][l]{\revy@personFormat ##1}%
+        }{%
+          {\revy@personFormat ##1}\ %
+        }%
+      }{%
+        \makebox[\revy@versFigurLabelWidth][l]{}%
+      }%
+    }{}%
+    {\revy@versFormat\ignorespaces##2}%
+  }
+
+  \newcommand{\Akkord}[1]{\revy@akkord{##1}}
+  \newcommand{\chordspace}[1]{\phantom{##1}\hspace*{1ex}}
+
+  \newenvironment{Strofe}[1][---]{%
+    \setboolean{revy@firstVers}{true}
+    \noindent%
+    \begin{minipage}[t]{\linewidth}%
+      %% \begin{raggedright}%
+        \ignorespaces%
+        \setlength{\hangindent}{\revy@verseLabelWidth+\revy@verseLabelOffset}%
+        \ifthenelse{\equal{##1}{---}}{%
+          \refstepcounter{revy@verse}%
+          \makebox[\revy@verseLabelWidth][r]{\revy@strofeEtiketFormat \arabic{revy@verse}.}%
+        }{%
+          \makebox[\revy@verseLabelWidth][r]{\revy@strofeEtiketFormat ##1}%
+        }%
+        \hspace*{\revy@verseLabelOffset}%
+        \ignorespaces%
+  }{%
+      %% \end{raggedright}%
+    \end{minipage}%
+    \par%
+    \vspace{\revy@strofeafstand}%
+  }%
+
+  \newenvironment{Kommentar}{%
+    \noindent%
+    \begin{minipage}[t]{\linewidth}%
+      \revy@kommentarFormat\ignorespaces%
+  }{%
+    \end{minipage}
+    \par%
+    %% \vspace{\revy@strofeafstand}%
+  }
+
+  \setcounter{revy@verse}{0}%
+  \setlength{\parskip}{0mm}%
+  \ifthenelse{\boolean{revy@inSketch}}{%
+    \subsection*{#2}%\addcontentsline{toc}{subsection}{#2}
+  }{%
+    %% \clearpage%
+    \section*{#2}%
+    \addcontentsline{toc}{section}{#2}%
+  }
+  \ifthenelse{\equal{#1}{}}{}{Mel: #1\par\vspace*{3mm}}%
+  \setlength{\hbadness}{\maxdimen}%
+}{%
+  \par
+}
+
+\newenvironment{Footer}{%
+  \nopagebreak%
+  \noindent%
+  \begin{minipage}{\linewidth}%
+    \hrulefill \\%
+    \begin{raggedleft}\itshape %
+      \ignorespaces%
+  }{%
+    \end{raggedleft}%
+  \end{minipage}%
+  \par%
+}
+
+\providecommand{\leftQuote}{%
+  %% ``%
+  %% \glqq%
+  \frqq%
+  \ignorespaces%
+}
+\providecommand{\rightQuote}{%
+  %% ''%
+  %% \grqq%
+  \flqq%
+}
+
+\renewcommand{\quote}[1]{{\leftQuote #1\rightQuote}}
+
+\newcommand{\dreng}{$\mars$}
+\newcommand{\pige}{$\venus$}
+\newcommand{\sangrolle}{$\twonotes$}
+\newcommand{\sketchrolle}{\tikz \draw[thin] (0,0) arc [start angle=220, end angle=-100, x
+  radius=0.35em, y radius=0.25em] -- +(-0.3em,-0.1em) -- cycle;\xspace}

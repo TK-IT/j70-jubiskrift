@@ -13,7 +13,7 @@ jobs:
           root_file: main/main.tex
 
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: PDF
           path: main/main.pdf

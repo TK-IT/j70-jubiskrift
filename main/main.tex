@@ -5,13 +5,32 @@
 \setcounter{secnumdepth}{0}
 \setcounter{tocdepth}{0}
 \setsecnumformat{}
-\title{J70 Jubilæums skrift}
-\begin{document}
 
+\begin{document}
+\newcommand{\dropcaptitle}[1]{%
+  {\fontsize{70}{70}\selectfont #1}%
+}
+
+\pretitle{\begin{center}}
+\posttitle{\par\end{center}\vskip 1em}
+
+\title{%
+  \dropcaptitle{Jubilæumsskrift}\\[1em]
+  \vspace{2em}
+  \includesvg[width=\textwidth]{../img/j70_logo}
+  \vspace{1em}\\
+  \dropcaptitle{\TKET}
+  \vspace{2em}\\
+  \dropcaptitle{1956-2026}%
+}
+\date{}
 \maketitle
+\newpage
+\input{../pages/kolofon}
+
+
 \tableofcontents
 \newpage
-
 
 \input{../pages/gordon_og_brians_vielse}
 

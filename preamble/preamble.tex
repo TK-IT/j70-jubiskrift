@@ -12,14 +12,23 @@
 \usepackage{wrapfig} %Used to make figures inline with text
 \usepackage{hyperref}
 \usepackage{microtype}
-\usepackage{lmodern}
+\usepackage[sc]{mathpazo} %sc=small caps, osf=sc+old style numerals
+\usepackage[scaled=.95]{helvet}
+\usepackage{courier}
 \usepackage{svg}
 
-\geometry{
- top = 25mm,
- left = 30mm,
- right = 30mm,
- bottom = 25mm,}
+% -------------------------------------
+%  Dimensioner på siden
+% -------------------------------------
+\setlength{\textheight}{18cm}          % Højden af tekstområdet
+\setlength{\textwidth}{12.45cm}        % Bredden af tekstområdet
+
+\setlength{\voffset}{-30mm}            % Offset fra 1inch fra toppen
+
+\setlength{\hoffset}{8mm}              % Vi ønsker kun 8mm fra sidekanten, men må derfor først
+\addtolength{\hoffset}{-1in}           % tilføje 8mm før de 1" fra hoffset fjernes.
+
+\setlength{\oddsidemargin}{7mm}        % Forskydning i forhold til hver anden side
 
 \setlength{\epigraphrule}{0pt}
 

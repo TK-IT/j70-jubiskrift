@@ -1,4 +1,4 @@
-\documentclass[a4paper, article, 11pt, oneside]{memoir}
+\documentclass[danish, 9pt, a5paper, twoside]{memoir}
 \input{../preamble/preamble.tex}
 \usepackage{../preamble/tket}
 \usepackage{../preamble/revy}
@@ -6,23 +6,18 @@
 \setcounter{tocdepth}{0}
 \setsecnumformat{}
 
-\begin{document}
-\newcommand{\dropcaptitle}[1]{%
-  {\fontsize{70}{70}\selectfont #1}%
-}
 
-\pretitle{\begin{center}}
-\posttitle{\par\end{center}\vskip 1em}
+\begin{document}
 
 \title{%
-  \dropcaptitle{Jubilæumsskrift}\\[1em]
-  \vspace{2em}
-  \includegraphics[width=\textwidth]{../img/j70_logo.pdf}
-  \vspace{1em}\\
-  \dropcaptitle{\TKET}
-  \vspace{2em}\\
-  \dropcaptitle{1956-2026}%
-}
+\begin{center}
+	{\centering\Huge\scshape\fontsize{1.3cm}{1.4cm}\selectfont Jubilæumsskrift\par}
+	\vfill
+	{\centering\includegraphics[height=9cm]{../img/j70_logo.pdf}\par}
+	\vfill
+	{\fontsize{0.86cm}{1.07cm}\selectfont TÅGEKAMMERET\par\vspace{1em}1956--2026\par}
+\end{center}
+}%
 \date{}
 \maketitle
 \newpage

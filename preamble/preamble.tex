@@ -1,3 +1,7 @@
+\makeatletter
+\ifx\documentclass\@twoclasseserror\else
+\documentclass[danish,9pt,a5paper,twoside]{memoir}
+\fi
 \usepackage{float}
 \usepackage{amsmath, amssymb, amsfonts}
 \usepackage{verbatim}
@@ -20,15 +24,48 @@
 % -------------------------------------
 %  Dimensioner på siden
 % -------------------------------------
-\setlength{\textheight}{18cm}          % Højden af tekstområdet
-\setlength{\textwidth}{12.45cm}        % Bredden af tekstområdet
+\geometry{
+    top=25mm,
+    left=30mm,
+    right=30mm,
+    bottom=25mm
+}
 
-\setlength{\voffset}{-30mm}            % Offset fra 1inch fra toppen
+% -------------------------------------
+% Kapitelopsætning
+% -------------------------------------
 
-\setlength{\hoffset}{8mm}              % Vi ønsker kun 8mm fra sidekanten, men må derfor først
-\addtolength{\hoffset}{-1in}           % tilføje 8mm før de 1" fra hoffset fjernes.
+\makechapterstyle{chapterstyle}{
+    \renewcommand{\chapnamefont}{\normalfont\Large}
+    \renewcommand{\chapnumfont}{\normalfont\Large}
+    \renewcommand{\chaptitlefont}{\normalfont\Huge\bfseries}
 
-\setlength{\oddsidemargin}{7mm}        % Forskydning i forhold til hver anden side
+    \renewcommand{\printchaptername}{}
+    \renewcommand{\printchapternum}{}
+
+    \renewcommand{\afterchapternum}{}
+    \renewcommand{\afterchaptertitle}{\par\vspace{10pt}}
+    \setlength{\beforechapskip}{0pt}
+    \setlength{\afterchapskip}{15pt}
+}
+
+\chapterstyle{chapterstyle}
+
+% -------------------------------------
+% Sideopsætning
+% -------------------------------------
+
+\makepagestyle{pagestyle}
+
+\makeoddhead{pagestyle}{}{\itshape\leftmark}{}
+\makeevenhead{pagestyle}{}{\itshape\rightmark}{}
+
+\makeoddfoot{pagestyle}{}{\thepage}{}
+\makeevenfoot{pagestyle}{}{\thepage}{}
+
+\pagestyle{pagestyle}
+\aliaspagestyle{chapter}{pagestyle}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
 
 \setlength{\epigraphrule}{0pt}
 

@@ -20,15 +20,16 @@
 \usepackage[scaled=.95]{helvet}
 \usepackage{courier}
 \usepackage{svg}
+\usepackage{adjustbox}
 
 % -------------------------------------
 %  Dimensioner på siden
 % -------------------------------------
 \geometry{
-    top=25mm,
-    left=30mm,
-    right=30mm,
-    bottom=25mm
+    top=15mm,
+    left=15mm,
+    right=15mm,
+    bottom=15mm
 }
 
 % -------------------------------------
@@ -70,4 +71,28 @@
 \setlength{\epigraphrule}{0pt}
 
 \newcommand{\alkymia}{@lkymia}
-\newcommand{\alkymias}{@lkymias}
+\newcommand{\alkymias}{@lkymiask}
+
+% -------------------------------------
+% Bestyrelses-tabeller
+% -------------------------------------
+\newlength{\boardrolewidth}
+\setlength{\boardrolewidth}{1.1cm}
+
+\newenvironment{board}{%
+    \begin{tabular}{@{}p{\boardrolewidth}l@{}}
+}{%
+    \end{tabular}
+    \par\bigskip
+}
+\newcommand{\boardtitle}[1]{%
+    & \textbf{#1} \\
+}
+\newcommand{\bname}[1]{%
+    \adjustbox{max width=\dimexpr\linewidth-\boardrolewidth\relax}{#1}%
+}
+\newenvironment{boardpage}{%
+    \begin{multicols}{2}
+}{%
+    \end{multicols}
+}

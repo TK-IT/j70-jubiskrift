@@ -98,3 +98,32 @@
 }{%
     \end{multicols}
 }
+
+% -------------------------------------
+% Citatbokse (svævende citater)
+% -------------------------------------
+% \citat[placering]{bredde}{citat}
+% placering: r/l/i/o (som wrapfigure), default r
+% bredde: andel af linewidth, fx 0.45\linewidth
+\newcommand{\citat}[3][r]{%
+    \begin{wrapfigure}{#1}{#2}
+        \vspace{-4pt}
+        \noindent\rule{\linewidth}{0.6pt}\par\vspace{4pt}
+        \noindent\itshape\fontsize{8}{10}\selectfont``#3''\par\vspace{4pt}
+        \noindent\normalfont\rule{\linewidth}{0.6pt}
+        \vspace{-4pt}
+    \end{wrapfigure}%
+}
+ 
+% \citatliste[placering]{bredde}{indhold}
+% Samme som \citat, men til flere korte citater i forlængelse af hinanden.
+% Adskil de enkelte citater med \\[4pt] i #3.
+\newcommand{\citatliste}[3][r]{%
+    \begin{wrapfigure}{#1}{#2}
+        \vspace{-4pt}
+        \noindent\rule{\linewidth}{0.6pt}\par\vspace{4pt}
+        \noindent\itshape\fontsize{8}{10}\selectfont #3\par\vspace{4pt}
+        \noindent\normalfont\rule{\linewidth}{0.6pt}
+        \vspace{-4pt}
+    \end{wrapfigure}%
+}

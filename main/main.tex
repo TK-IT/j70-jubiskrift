@@ -1,21 +1,23 @@
-\documentclass[a4paper, article, 11pt, oneside]{memoir}
 \input{../preamble/preamble.tex}
-\usepackage{../preamble/tket}
+\usepackage[gf=2026]{../preamble/tket}
 \usepackage{../preamble/revy}
-\title{J70 Jubilæums skrift}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{0}
+\setsecnumformat{}
+
 \begin{document}
 
 \newgeometry{
-	textwidth=12.45cm,
-	textheight=18cm,
-	left=8mm,
-	top=10mm
+    textwidth=12.45cm,
+    textheight=18cm,
+    left=8mm,
+    top=10mm
 }
 \pagenumbering{gobble}
 \begin{center}
 	{\centering\Huge\scshape\fontsize{1.3cm}{1.4cm}\selectfont Jubilæumsskrift\par}
 	\vfill
-	%{\centering\includegraphics[height=9cm]{../img/j70_logo.pdf}\par}
+	{\centering\includegraphics[height=9cm]{../img/j70_logo.pdf}\par}
 	\vfill
 	{\fontsize{0.86cm}{1.07cm}\selectfont TÅGEKAMMERET\par\vspace{1em}1956--2026\par}
 \end{center}
@@ -23,18 +25,46 @@
 \restoregeometry
 \newpage
 
-\maketitle
+\input{../pages/kolofon}
+
+\newpage
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+
 \tableofcontents
 \newpage
 
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
-%\input{../pages/gordon_og_brians_vielse}
+%\input{../pages/forord}
 
-\input{../pages/spil/Neutrino}
+%\input{../pages/tks_historie}
 
-\input{../pages/spil/firePåStribe}
+%\input{../pages/loebesedler}
+%\input{../pages/breve}
 
-\input{../pages/spil/vektorrally}
+%\input{../pages/BEST}
+\input{../pages/bestyrelsesgrupperinger}
 
-\input{../pages/spil/kammerha}
+\input{../pages/dagligdag}
+
+\input{../pages/arrangementer}
+\input{../pages/EKIEF}
+
+\input{../pages/revy}
+
+%\input{../pages/andet}
+\input{../pages/anekdoter}
+%\input{../pages/kapsejladsen}
+%\input{../pages/venskabsforeninger}
+\input{../pages/pride}
+\input{../pages/gordon_og_brians_vielse}
+%\input{../spil/*}
+
+\input{../pages/bestyrelser_med_aarstal}
+
+
 \end{document}

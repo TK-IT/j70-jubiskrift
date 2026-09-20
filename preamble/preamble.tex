@@ -127,3 +127,16 @@
         \vspace{-4pt}
     \end{wrapfigure}%
 }
+
+% -------------------------------------
+% Løbesedler og breve
+% -------------------------------------
+% \picture[bredde]{filnavn}
+% Indsætter et billede centreret i en figure.
+% "bredde" er andel af linewidth (eller en fast længde), default 0.55\linewidth.
+\newcommand{\tkpicture}[2][0.55\linewidth]{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1]{#2}
+    \end{figure}%
+}

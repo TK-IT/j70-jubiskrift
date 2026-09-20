@@ -32,14 +32,22 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 
+\makeatletter
+{\renewcommand{\contentsname}{}
+\let\addcontentsline\@gobblethree
+\openany
+\tableofcontents}
+\makeatother
 
-\tableofcontents
+\openany
+\input{../pages/forord}
+\openright
+
 \newpage
+
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
-\input{../pages/forord}
 
 \input{../pages/tks_historie}
 

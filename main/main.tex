@@ -2,7 +2,7 @@
 \usepackage[gf=2026]{../preamble/tket}
 \usepackage{../preamble/revy}
 \setcounter{secnumdepth}{0}
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 \setsecnumformat{}
 
 \begin{document}
@@ -32,48 +32,39 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 
+\makeatletter
+{\renewcommand{\contentsname}{}
+\let\addcontentsline\@gobblethree
+\openany
+\tableofcontents}
+\makeatother
 
-\tableofcontents
+\openany
+\input{../pages/forord}
+\openright
+
 \newpage
+
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-%\input{../pages/forord}
+\input{../pages/tks_historie}
 
-%\input{../pages/tks_historie}
+\input{../pages/tks_skrivelser}
 
-%\input{../pages/loebesedler}
-%\input{../pages/breve}
-
-%\input{../pages/BEST}
-%\input{../pages/bestyrelsesgrupperinger}
+\input{../pages/best}
+\input{../pages/bestyrelsesgrupperinger}
 
 %\input{../pages/dagligdag}
 
 \input{../pages/arrangementer}
-%\input{../pages/EKIEF}
 
-%\input{../pages/revy}
+\input{../pages/revy}
 
-%\input{../pages/andet}
-%\input{../pages/anekdoter}
-%\input{../pages/kapsejladsen}
-%\input{../pages/venskabsforeninger}
-%\input{../pages/pride}
-%\input{../pages/gordon_og_brians_vielse}
-\input{../pages/Spil/prugle}
-\input{../pages/Spil/kammerha}
-\input{../pages/Spil/30}
-\input{../pages/Spil/firePåStribe}
-\input{../pages/Spil/Neutrino}
-\input{../pages/Spil/vektorrally}
-\input{../pages/Spil/academy}
+\input{../pages/diverse}
 
-
-
-
-%\input{../pages/bestyrelser_med_aarstal}
+\input{../pages/bestyrelser_med_aarstal}
 
 
 \end{document}

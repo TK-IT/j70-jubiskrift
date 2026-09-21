@@ -238,7 +238,7 @@
   \setlength{\parskip}{0mm}%
   %% \clearpage
   \section*{#1}%
-  \addcontentsline{toc}{section}{#1}
+  \ifthenelse{\equal{#1}{}}{}{\addcontentsline{toc}{section}{#1}}%
   \setboolean{revy@inSketch}{true}%
 }{%
   \setboolean{revy@inSketch}{false}%

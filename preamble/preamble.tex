@@ -2,6 +2,12 @@
 \ifx\documentclass\@twoclasseserror\else
 \documentclass[danish,9pt,a5paper,twoside]{memoir}
 \fi
+\pagestyle{simple}
+% Brug "empty" pagestyle til indholdsfortegnelsen:
+% https://tex.stackexchange.com/a/140777/76220
+\aliaspagestyle{index}{empty}
+\aliaspagestyle{chapter}{empty}
+
 \usepackage{float}
 \usepackage{amsmath, amssymb, amsfonts}
 \usepackage{verbatim}

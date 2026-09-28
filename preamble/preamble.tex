@@ -155,3 +155,11 @@
         \includegraphics[width=#1]{#2}
     \end{figure}%
 }
+
+
+% \ls{nummer}{filnavn}
+% Indsætter en løbeseddel med titel og skaleret
+\newcommand{\ls}[2]{%
+    \subsubsection*{Løbeseddel #1}
+    \tkpicture[0.8\linewidth]{#2}
+}

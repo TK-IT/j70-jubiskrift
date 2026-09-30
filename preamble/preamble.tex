@@ -17,11 +17,9 @@
 \usepackage{graphicx}
 \usepackage{siunitx}
 \usepackage{multicol}
-\usepackage{relsize}
-\usepackage{geometry}
 \usepackage{wrapfig} %Used to make figures inline with text
 \usepackage{hyperref}
-\usepackage{microtype}
+\usepackage[final]{microtype}
 \usepackage[sc]{mathpazo} %sc=small caps, osf=sc+old style numerals
 \usepackage[scaled=.95]{helvet}
 \usepackage{courier}
@@ -32,12 +30,10 @@
 % -------------------------------------
 %  Dimensioner på siden
 % -------------------------------------
-\geometry{
-    top=15mm,
-    left=15mm,
-    right=15mm,
-    bottom=15mm
-}
+\settypeblocksize{180mm}{118mm}{*}
+\setlrmargins{*}{*}{1.25}
+\setulmargins{*}{*}{1}
+\checkandfixthelayout
 
 % -------------------------------------
 % Kapitelopsætning
@@ -86,8 +82,8 @@
 
 \setlength{\epigraphrule}{0pt}
 
-\newcommand{\alkymia}{@lkymia }
-\newcommand{\alkymias}{@lkymias }
+\newcommand{\alkymia}{@lkymia\xspace}
+\newcommand{\alkymias}{@lkymias\xspace}
 
 % -------------------------------------
 % Bestyrelses-tabeller
@@ -106,7 +102,7 @@
     & \textbf{#1} \\
 }
 \newcommand{\bname}[1]{%
-    \adjustbox{max width=\dimexpr\linewidth-\boardrolewidth\relax}{#1}%
+    \adjustbox{max width=48mm}{#1}%
 }
 \newenvironment{boardpage}{%
     \begin{multicols}{2}
